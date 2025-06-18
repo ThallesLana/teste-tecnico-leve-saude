@@ -1,0 +1,34 @@
+service: teste-tecnico-leve-saude
+
+provider:
+  name: aws
+  runtime: nodejs23.x
+  region: sa-east-1
+  stage: dev
+  memorySize: 128
+  timeout: 30
+  environment:
+    NODE_ENV: ${self:provider.stage}
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+  - serverless-prune-plugin
+
+package:
+  individually: true
+
+functions:
+  getAgendas:
+    handler: src/agenda/controller/agendaController.getAgendas
+    events:
+      - http:
+          path: agendas
+          method: get
+  
+  createSchedule:
+    handler: src/schedules/controller/schedulesController.createSchedule
+    events:
+      - http:
+          path: agendamento
+          method: post
