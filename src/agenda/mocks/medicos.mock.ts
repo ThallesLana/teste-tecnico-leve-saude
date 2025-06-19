@@ -1,4 +1,4 @@
-import { IMedico } from "../dto/agenda.interface";
+import { IMedico } from "../interface/agenda.interface";
 
 export const MEDICO_MOCKS: IMedico[] = [
     {
