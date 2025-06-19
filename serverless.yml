@@ -2,7 +2,7 @@ service: teste-tecnico-leve-saude
 
 provider:
   name: aws
-  runtime: nodejs23.x
+  runtime: nodejs22.x
   region: sa-east-1
   stage: dev
   memorySize: 128
@@ -12,7 +12,6 @@ provider:
 
 plugins:
   - serverless-offline
-  - serverless-webpack
   - serverless-prune-plugin
 
 package:
@@ -32,3 +31,14 @@ functions:
       - http:
           path: agendamento
           method: post
+
+custom:
+  esbuild:
+    bundle: true
+    minify: true
+    sourcemap: true
+    exclude: ['aws-sdk']
+    target: 'node22'
+    platform: 'node'
+    external: ['@aws-sdk']
+    packager: 'npm'
